@@ -1,0 +1,16 @@
+package com.example.letspractice
+
+const val NAME:String="entry.1790549303"
+const val COMPANY_NAME:String="entry.2143120506"
+const val USER_NAME:String="entry.81841870"
+const val WORKING_EMAIL:String="entry.1160245735"
+const val CONTACT:String="entry.825755807"
+const val ADDRESS:String="entry.956891889"
+const val ORGANIZATION_NAME:String="entry.75235150"
+const val VEHICLE_PLATE_NO:String="entry.1844681132"
+const val IMED:String="entry.1475913615"
+const val SIM_GSM_NUMBER:String="entry.236189711"
+const val TYPE_OF_VEHICLE:String="entry.1748521135"
+const val DRIVER_NAME:String="entry.58108763"
+const val DRIVER_ADDRESS:String="entry.394926729"
+const val DRIVER_CONTACT:String="entry.1541417863"

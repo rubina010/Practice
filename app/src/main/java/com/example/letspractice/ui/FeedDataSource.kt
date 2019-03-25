@@ -1,7 +1,8 @@
-package com.example.letspractice
+package com.example.letspractice.ui
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.PageKeyedDataSource
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PageKeyedDataSource
+import com.example.letspractice.Article
 import com.example.letspractice.utils.NetworkState
 
 class FeedDataSource : PageKeyedDataSource<Long, Article>() {

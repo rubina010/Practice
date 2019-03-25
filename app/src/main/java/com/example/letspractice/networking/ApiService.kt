@@ -1,6 +1,6 @@
 package com.example.letspractice.networking
 
-import com.example.letspractice.Entity.StackFlowResponse
+import com.example.letspractice.entity.StackFlowResponse
 import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Query
