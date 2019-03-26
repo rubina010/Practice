@@ -1,6 +1,7 @@
 package com.example.letspractice
 
 import com.example.letspractice.networking.ApiService
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -22,6 +23,7 @@ class ApiModule {
 
         val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(httpLoggingInterceptor)
+                .addNetworkInterceptor(StethoInterceptor())
                 .build()
 
         return Retrofit.Builder()

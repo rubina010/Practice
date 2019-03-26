@@ -7,7 +7,6 @@ import com.example.letspractice.entity.Items
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 
 class ItemDataSource : PageKeyedDataSource<Int, Items>() {
     val PAGE_KEY: Int = 1
@@ -16,11 +15,12 @@ class ItemDataSource : PageKeyedDataSource<Int, Items>() {
 
     override fun loadInitial(params: LoadInitialParams<Int>, callback: LoadInitialCallback<Int, Items>) {
         Log.i("ItemDataSource", "load initial called")
-       // Timber.i("load initial called")
+        // Timber.i("load initial called")
         ApiModule.newInstance().createApiService().getAllAnswers(PAGE_KEY, PAGE_SIZE, SITE_NAME)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy {
+                    Log.i("ItemDataSource", "hasMoreinitial ${it.hasMore}")
                     callback.onResult(it.items, null, PAGE_KEY + 1)
                 }
     }
@@ -46,8 +46,8 @@ class ItemDataSource : PageKeyedDataSource<Int, Items>() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeBy {
-                    Timber.i("hasmoreItem ${it.hasMore}")
-                    val key: Int? = if (it.hasMore)
+                    Log.i("ItemDataSource", "hasMore ${it.hasMore}")
+                    val key: Int? = if (!it.hasMore)
                         params.key + 1
                     else
                         null

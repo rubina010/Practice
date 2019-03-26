@@ -5,10 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.letspractice.ApiModule
-import com.example.letspractice.entity.StackFlowResponse
 import com.example.letspractice.database.AppDatabase
 import com.example.letspractice.database.dao.StackFlowModelDao
-import timber.log.Timber
+import com.example.letspractice.entity.Items
+import com.example.letspractice.entity.StackFlowResponse
 
 class StackOverFlowRepository(app: Application) {
     var stackFlowModelDao: StackFlowModelDao
@@ -18,19 +18,22 @@ class StackOverFlowRepository(app: Application) {
         stackFlowModelDao = appDatabase.StackFlowModelDao()
     }
 
-    fun getDataFromApi() = ApiModule.newInstance().createApiService().getAllAnswers(1, 20, "stackoverflow")
+    fun getDataFromApi(currentPage: Int) = ApiModule.newInstance().createApiService().getAllAnswers(currentPage, 20, "stackoverflow")
     fun insertDataToDb(items: StackFlowResponse) = stackFlowModelDao.insertALLAnswers(items)
 
-    fun getDataFromDb(stackOverFlowViewModel: StackOverFlowViewModel): LiveData<PagedList<StackFlowResponse>> {
+    fun getDataFromDb(): LiveData<PagedList<StackFlowResponse>> {
         val factory = stackFlowModelDao.getAllAnswers()
-        Timber.i("factory size $factory.")
         val builder = LivePagedListBuilder(factory, PagedList.Config.Builder()
                 .setEnablePlaceholders(true)
                 .setPageSize(20)
                 .build())
         return builder
-                .setBoundaryCallback(StackOverFlowViewModel.StackOverFlowBoundaryCallback(stackOverFlowViewModel))
+                .setBoundaryCallback(StackOverFlowViewModel.StackOverFlowBoundaryCallback(this@StackOverFlowRepository))
                 .build()
 
     }
+
+    fun getAnswerCount() = stackFlowModelDao.getAnswerCount()
+
+    fun delete() = stackFlowModelDao.deleteAll()
 }

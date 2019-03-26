@@ -13,7 +13,4 @@ class ItemDataSourceFactory : DataSource.Factory<Int, Items>() {
         itemLiveDataSource.postValue(itemDataSource)
         return itemDataSource
     }
-
-    fun getLiveDataSource() = itemLiveDataSource
-
 }

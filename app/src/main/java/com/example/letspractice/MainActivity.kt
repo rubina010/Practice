@@ -17,15 +17,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         activity_main_recycler_view.layoutManager = LinearLayoutManager(this)
         itemViewModel = ViewModelProviders.of(this).get(StackOverFlowViewModel::class.java)
-        // itemViewModel.getDataFromApi()
-        // itemViewModel.getDataFromDd()
-        itemViewModel.getFactorySource()
+         itemViewModel.getDataFromApi()
+        // itemViewModel.getFactorySource()
         val itemAdapter = ItemAdapter(baseContext)
         /* itemViewModel.getPagedList().observe(this, Observer {
              if (it != null)
                  itemAdapter.submitList(it)
          })*/
-        itemViewModel.itemPageList.observe(this, Observer {
+        itemViewModel.livePageList.observe(this, Observer {
             if (it != null)
                 Toast.makeText(baseContext, "pagelist ${it.size}", Toast.LENGTH_LONG).show()
             itemAdapter.submitList(it)

@@ -15,4 +15,10 @@ interface StackFlowModelDao {
 
     @Query("SELECT * FROM tbl_stackItems")
     fun getAllAnswers(): DataSource.Factory<Int, StackFlowResponse>
+
+    @Query("SELECT COUNT(*) FROM tbl_stackItems")
+    fun getAnswerCount(): Int
+
+    @Query("DELETE  FROM tbl_stackItems")
+    fun deleteAll()
 }
